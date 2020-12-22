@@ -1,8 +1,8 @@
 const { getYieldForPlant,
     getYieldForCrop,
     getTotalYield,
-    getCostsForCrop }
-    = require('./functions.js');
+    getCostsForCrop,
+    getRevenueForCrop } = require("./functions");
 
 describe("getYieldForPlant", () => {
     const corn = {
@@ -65,7 +65,8 @@ describe("getCostsForCrop", () => {
         const input = {
             crop: corn,
             numCrops: 10,
+            costOfCrop: 1,
         };
-        expect(getCostsForCrop(input)).toBe(30);
+        expect(getCostsForCrop(input)).toBe(10);
     });
 });
