@@ -12,8 +12,18 @@ function getTotalYield(input) {
     return result;
 }
 
+function getCostsForCrop(crop) {
+    return crop.numCrops * crop.costOfCrop;
+}
+
+function getRevenueForCrop(crop) {
+
+}
+
 module.exports = {
     getYieldForPlant,
     getYieldForCrop,
     getTotalYield,
+    getCostsForCrop,
+    getRevenueForCrop,
 }  
