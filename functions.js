@@ -26,12 +26,13 @@ function calculateYieldWithInfluence(influence, factor, plantYield) {
             return calculateYieldInfluence(factor.high, plantYield);
         default:
             console.log('no factors submitted');
+            return plantYield;
     }
 }
 
 function calculateYieldInfluence(factor, yieldOfPlant) {
-    let infulence = calculateInfluenceOnYield(factor);
-    return yieldOfPlant * infulence;
+    const influence = calculateInfluenceOnYield(factor);
+    return yieldOfPlant * influence;
 }
 
 function calculateInfluenceOnYield(factor) {
@@ -44,7 +45,7 @@ function getYieldForCrop(crop, environment) {
     }
 
     const numberOfCrops = crop.numCrops;
-    let calculateYield = getYieldForPlant(crop.crop, environment);
+    const calculateYield = getYieldForPlant(crop.crop, environment);
     return calculateYield * numberOfCrops;
 }
 
@@ -67,15 +68,12 @@ function getProfitForCrop(crop, environment) {
     const yieldInKilos = getYieldForPlant(crop.crop, environment);
     const salePrice = getRevenueForCrop(crop);
     const totalSalePrice = yieldInKilos * salePrice;
-    return totalSalePrice - costs;
+    return Math.round(totalSalePrice - costs);
 }
 
 function getTotalProfit(crops, environment) {
-    let costs = 0;
-    crops.forEach(crop => costs = costs + getCostsForCrop(crop));
-    let revenue = 0;
-    crops.forEach(crop => revenue = revenue + getProfitForCrop(crop, environment));
-    let profit = Math.round(revenue - costs);
+    let profit = 0;
+    crops.forEach(crop => profit = profit + getProfitForCrop(crop, environment));
     return profit;
 }
 
