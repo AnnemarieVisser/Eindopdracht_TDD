@@ -39,7 +39,6 @@ function calculateInfluenceOnYield(factor) {
 }
 
 function getYieldForCrop(crop, environment) {
-
     if (environment == undefined) {
         return crop.crop.yield * crop.numCrops;
     }
@@ -47,7 +46,6 @@ function getYieldForCrop(crop, environment) {
     const numberOfCrops = crop.numCrops;
     let calculateYield = getYieldForPlant(crop.crop, environment);
     return calculateYield * numberOfCrops;
-
 }
 
 function getTotalYield(input) {
@@ -61,30 +59,23 @@ function getCostsForCrop(crop) {
 }
 
 function getRevenueForCrop(crop) {
-    return crop.numCrops * crop.crop.revenue;
+    return crop.numCrops * crop.crop.saleprice;
 }
 
 function getProfitForCrop(crop, environment) {
-
-    if (environment == undefined) {
-        let costs = getCostsForCrop(crop);
-        let revenue = getRevenueForCrop(crop);
-        let profit = revenue - costs;
-        return profit;
-    }
-
-    let costs = getCostsForCrop(crop);
-    let revenue = getRevenueForCrop(crop);
-    let profit = revenue - costs;
-    return profit;
+    const costs = getCostsForCrop(crop);
+    const yieldInKilos = getYieldForPlant(crop.crop, environment);
+    const salePrice = getRevenueForCrop(crop);
+    const totalSalePrice = yieldInKilos * salePrice;
+    return totalSalePrice - costs;
 }
 
-function getTotalProfit(input) {
+function getTotalProfit(crops, environment) {
     let costs = 0;
-    input.crops.forEach(crop => costs = costs + getCostsForCrop(crop));
+    crops.forEach(crop => costs = costs + getCostsForCrop(crop));
     let revenue = 0;
-    input.crops.forEach(crop => revenue = revenue + getRevenueForCrop(crop));
-    let profit = revenue - costs;
+    crops.forEach(crop => revenue = revenue + getProfitForCrop(crop, environment));
+    let profit = Math.round(revenue - costs);
     return profit;
 }
 
