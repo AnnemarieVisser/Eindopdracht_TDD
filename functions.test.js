@@ -256,9 +256,9 @@ describe("getProfitForCrop", () => {
             yield: 3,
             costOfCrop: 1,
             saleprice: 2,
-            
+
         };
-       
+
         const input = {
             crop: corn,
             numCrops: 10,
@@ -368,7 +368,7 @@ describe("getProfitForCrop", () => {
 });
 
 describe("getTotalProfit", () => {
-    
+
     test("Calculate total profit with multiple crops", () => {
         const corn = {
             name: "corn",
@@ -386,7 +386,7 @@ describe("getTotalProfit", () => {
             { crop: corn, numCrops: 50 },
             { crop: pumpkin, numCrops: 20 },
         ];
-        expect(getTotalProfit(crops)).toBe(480);
+        expect(getTotalProfit(crops)).toBe(550);
     });
 
     test("Calculate total profit with multiple crops and low environment influence", () => {
@@ -436,7 +436,7 @@ describe("getTotalProfit", () => {
             { crop: corn, numCrops: 50 },
             { crop: pumpkin, numCrops: 30 },
         ];
-        expect(getTotalProfit( crops, environmentFactors)).toBe(44);
+        expect(getTotalProfit(crops, environmentFactors)).toBe(124);
     });
 
     test("Calculate total profit with multiple crops and medium environment influence", () => {
@@ -486,7 +486,7 @@ describe("getTotalProfit", () => {
             { crop: corn, numCrops: 50 },
             { crop: pumpkin, numCrops: 30 },
         ];
-        expect(getTotalProfit( crops, environmentFactors)).toBe(620);
+        expect(getTotalProfit(crops, environmentFactors)).toBe(700);
     });
 
     test("Calculate total profit with multiple crops and high environment influence", () => {
@@ -536,6 +536,6 @@ describe("getTotalProfit", () => {
             { crop: corn, numCrops: 50 },
             { crop: pumpkin, numCrops: 30 },
         ];
-        expect(getTotalProfit( crops, environmentFactors)).toBe(1789);
+        expect(getTotalProfit(crops, environmentFactors)).toBe(1869);
     });
 });
